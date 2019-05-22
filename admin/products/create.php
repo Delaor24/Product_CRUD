@@ -1,10 +1,16 @@
-<?php include '../../inc/database.php';?>
+<?php include '../../inc/database.php';
+
+session_start();
+if(!isset($_SESSION['adminLogin'])){
+	header("Location:../../index.php");
+}
 
 
-<?php
+
 
 
 if(isset($_POST['submit'])){
+	$c_id = $_POST['category_id'];
 	$p_name = $_POST['productName'];
 	$p_description = $_POST['productDescription'];
 	$p_price = $_POST['productPrice'];
@@ -25,7 +31,7 @@ if(isset($_POST['submit'])){
 
 		}
 
-		$sql = "insert into product (p_name,p_description,p_price,p_image) VALUES ('$p_name','$p_description',$p_price,'$image')";
+		$sql = "insert into product (category_id,p_name,p_description,p_price,p_image) VALUES ($c_id,'$p_name','$p_description',$p_price,'$image')";
 
 		$result = mysqli_query($con,$sql);
 
@@ -63,6 +69,14 @@ if(isset($_POST['submit'])){
             <li class="list-group-item">
               <a href="../dashboard.php">Dashboard</a>
             </li>
+            
+            <li class="list-group-item">
+              <a href="../categories/create.php">Create Category</a>
+            </li>
+
+            <li class="list-group-item">
+              <a href="../categories/all_category.php">Show All Category</a>
+            </li>
 
               <li class="list-group-item">
               <a href="create.php">Create product</a>
@@ -70,6 +84,11 @@ if(isset($_POST['submit'])){
 
               <li class="list-group-item">
               <a href="all_product.php">All product</a>
+            </li>
+
+             <li class="list-group-item">
+             
+              <button class="btn btn-dark"><a style="text-decoration: none" href="../logout.php">Logout</a></button>
             </li>
 
              
@@ -86,11 +105,33 @@ if(isset($_POST['submit'])){
 						  </div>
 						  <div class="card-body">
 						    <form action="create.php" method="post" enctype="multipart/form-data">
+
+						    	 <div class="form-group">
+								    <label>Product Category Name</label>
+								
+								    <select class="form-control" name="category_id">
+								    	    <?php 
+								       $sql = "select * from product_category";
+								       $result = mysqli_query($con,$sql);
+
+								       while ($row = mysqli_fetch_assoc($result)) { ?>
+								       	
+								
+										  <option value="<?php echo $row['category_id']?>"><?php echo $row['category_name'] ?></option>
+										      <?php } ?>
+										 
+									</select>
+								
+								    
+								  </div>
+
 								  <div class="form-group">
 								    <label>Product Name</label>
 								    <input type="text" class="form-control"  placeholder="Enter product name" name="productName" required="">
 								    
 								  </div>
+
+								 
 
 								  <div class="form-group">
 								    <label>Product Description</label>

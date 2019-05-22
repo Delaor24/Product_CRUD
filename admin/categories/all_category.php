@@ -6,7 +6,7 @@ if(!isset($_SESSION['adminLogin'])){
   header("Location:../../index.php");
 }
 
-$sql = "select * from product";
+$sql = "select * from product_category";
 
 $result = mysqli_query($con,$sql);
 
@@ -65,9 +65,8 @@ $result = mysqli_query($con,$sql);
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Product Name</th>
-                  <th scope="col">Product price</th>
-                  <th scope="col">Image</th>
+                  <th scope="col">Category Name</th>
+                  
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -78,12 +77,11 @@ $result = mysqli_query($con,$sql);
                while($row = mysqli_fetch_assoc($result)){?> 
                 <tr>
                   <th scope="row"><?php echo $seriel++ ?></th>
-                  <td><?php echo $row['p_name'] ?></td>
-                  <td><?php echo $row['p_price'] ?></td>
-                  <td><img src="../../images/products/<?php echo $row['p_image'] ?>" width=40px; height=40px; ></td>
+                  <td><?php echo $row['category_name'] ?></td>
+                 
                     <td>
-                      <button class="btn btn-info"><a href="update.php?id=<?php echo $row['p_id']?>">Edit</a></button>
-                      <button class="btn btn-danger"><a href="delete.php?id=<?php echo $row['p_id']?>">Delete</a></button>
+                      <button class="btn btn-info"><a href="update.php?id=<?php echo $row['category_id']?>">Edit</a></button>
+                      <button class="btn btn-danger"><a href="delete.php?id=<?php echo $row['category_id']?>">Delete</a></button>
                     </td>
                 </tr>
 

@@ -1,5 +1,10 @@
 
-
+<?php include '../inc/database.php';
+session_start();
+if(!isset($_SESSION['adminLogin'])){
+  header("Location:../index.php");
+}
+?>
 
 <!doctype html>
 <html lang="en">
@@ -15,6 +20,7 @@
     <title>Dashboard</title>
   </head>
   <body>
+   
     <div class="container">
       <div class="row">
         <div class="col-md-4">
@@ -23,12 +29,24 @@
               <a href="dashboard.php">Dashboard</a>
             </li>
 
-              <li class="list-group-item">
+            <li class="list-group-item">
+              <a href="categories/create.php">Create Category</a>
+            </li>
+
+            <li class="list-group-item">
+              <a href="categories/all_category.php">Show All Category</a>
+            </li>
+
+           <li class="list-group-item">
               <a href="products/create.php">Create product</a>
             </li>
 
-              <li class="list-group-item">
+            <li class="list-group-item">
               <a href="products/all_product.php">All product</a>
+            </li>
+
+             <li class="list-group-item">
+              <button class="btn btn-dark"><a style="text-decoration: none" href="logout.php">Logout</a></button>
             </li>
 
              

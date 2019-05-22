@@ -30,6 +30,16 @@
               <a href="../dashboard.php">Dashboard</a>
             </li>
 
+             <li class="list-group-item">
+              <a href="../categories/create.php">Create Category</a>
+            </li>
+
+            <li class="list-group-item">
+              <a href="../categories/all_category.php">Show All Category</a>
+            </li>
+
+
+
               <li class="list-group-item">
               <a href="create.php">Create product</a>
             </li>
@@ -37,6 +47,12 @@
               <li class="list-group-item">
               <a href="all_product.php">All product</a>
             </li>
+
+             <li class="list-group-item">
+             
+              <button class="btn btn-dark"><a style="text-decoration: none" href="../logout.php">Logout</a></button>
+            </li>
+
 
              
           </ul>
@@ -48,10 +64,46 @@
           	
           		    <div class="card">
 						  <div class="card-header">
-						    Add Product
+						    Update Product
 						  </div>
 						  <div class="card-body">
 						    <form action="update.php?id=<?php echo $row['p_id']?>" method="post">
+
+                  <div class="form-group">
+                    <label>Product Category Name</label>
+                
+                    <select class="form-control" name="category_id">
+                          <?php 
+                       $sql = "select * from product_category";
+                       $result = mysqli_query($con,$sql);
+
+                       while ($c_row = mysqli_fetch_assoc($result)) { 
+                        $c_id = $c_row['category_id'];
+
+                        $p_id = $row['category_id'];
+                        if($c_id == $p_id){ ?>
+                        
+                        
+                
+                      <option selected value="<?php echo $c_row['category_id']?>"><?php echo $c_row['category_name'] ?></option>
+                          <?php  }
+                          else{ ?>
+                            <option  value="<?php echo $c_row['category_id']?>"><?php echo $c_row['category_name'] ?></option>
+
+                            <?php 
+
+
+                          }
+
+
+                        } ?>
+                     
+                  </select>
+                
+                    
+                  </div>
+
+
 								  <div class="form-group">
 								    <label>Product Name</label>
 								    <input type="text" class="form-control"  value="<?php echo $row['p_name'] ?>" name="productName" required="">
@@ -84,19 +136,24 @@
 
 
 									if(isset($_POST['submit'])){
+                    $c_id  = $_POST['category_id'];
 										$p_name = $_POST['productName'];
 										$p_description = $_POST['productDescription'];
 										$p_price = $_POST['productPrice'];
 
-											$sql = "UPDATE  product SET p_name = '$p_name',p_description = '$p_description',p_price = $p_price where p_id = $id";
+											$sql = "UPDATE  product SET category_id = '$c_id', p_name = '$p_name',p_description = '$p_description',p_price = $p_price where p_id = $id";
 
 										
 
 											$result = mysqli_query($con,$sql);
 
 											if($result){
+                        echo "<script>alert('Product updated!!')</script>";
 											
 											}
+                      else{
+                        echo "<script>alert('Product Not updated!!')</script>";
+                      }
 
 									}
 
