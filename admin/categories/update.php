@@ -109,6 +109,7 @@
 
 											if($result){
                         echo "<script>alert('Category updated!!')</script>";
+                        echo "<script>window.open('all_category.php','_self')</script>";
 											
 											}
                       else{

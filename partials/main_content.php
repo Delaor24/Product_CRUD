@@ -12,7 +12,7 @@ $result = mysqli_query($con,$sql);
    <?php while($row = mysqli_fetch_assoc($result)){?> 
     <div class="col-md-4">
          <div class="card mt-5" style = "width: 100%">
-          <img src="images/products/<?php echo $row['p_image']?>" class="card-img-top" width="100%" alt="mango">
+          <img src="images/products/<?php echo $row['p_image']?>" class="card-img-top" width="100%" height=250px alt="mango">
           <div class="card-body">
             <h5 class="card-title"><?php echo $row['p_name']; ?></h5>
             <p class="card-title">Price : <?php echo $row['p_price']; ?></p>

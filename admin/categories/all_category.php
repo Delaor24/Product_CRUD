@@ -43,11 +43,11 @@ $result = mysqli_query($con,$sql);
             </li>
 
               <li class="list-group-item">
-              <a href="create.php">Create product</a>
+              <a href="../products/create.php">Create product</a>
             </li>
 
               <li class="list-group-item">
-              <a href="all_product.php">All product</a>
+              <a href="../products/all_product.php">All product</a>
             </li>
 
             <li class="list-group-item">
@@ -66,7 +66,6 @@ $result = mysqli_query($con,$sql);
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Category Name</th>
-                  
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -80,8 +79,8 @@ $result = mysqli_query($con,$sql);
                   <td><?php echo $row['category_name'] ?></td>
                  
                     <td>
-                      <button class="btn btn-info"><a href="update.php?id=<?php echo $row['category_id']?>">Edit</a></button>
-                      <button class="btn btn-danger"><a href="delete.php?id=<?php echo $row['category_id']?>">Delete</a></button>
+                      <button class="btn btn-info"><a style="color: black;"  href="update.php?id=<?php echo $row['category_id']?>">Edit</a></button>
+                      <button class="btn btn-danger"><a style="color: black;" href="delete.php?id=<?php echo $row['category_id']?>">Delete</a></button>
                     </td>
                 </tr>
 

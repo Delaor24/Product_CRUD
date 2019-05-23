@@ -58,7 +58,7 @@
           </ul>
           
         </div>
-
+ 
         <div class="col-md-8">
           <div class="container">
           	
@@ -67,7 +67,7 @@
 						    Update Product
 						  </div>
 						  <div class="card-body">
-						    <form action="update.php?id=<?php echo $row['p_id']?>" method="post">
+						    <form action="update.php?id=<?php echo $row['p_id']?>" method="post" enctype="multipart/form-data">
 
                   <div class="form-group">
                     <label>Product Category Name</label>
@@ -122,10 +122,19 @@
 								    
 								  </div>
 
-								  
-								  
+                   <div class="form-group">
+                    <label>Product Image</label>
+                    <img src="../../images/products/<?php echo $row['p_image']?>" width=40px; height = 40px;>
+                    <input type="file" class="form-control" name="image"> 
 
-								  <button type="submit" class="btn btn-primary" name="submit">Add Product</button>
+                    <input type="hidden" value="<?php echo $row['p_image'] ?>" name="delete_file" />
+                    
+                  </div>
+
+								  
+								           
+
+								  <button type="submit" class="btn btn-primary" name="submit">Update Product</button>
 								</form>
 
 							<?php } ?>
@@ -140,8 +149,36 @@
 										$p_name = $_POST['productName'];
 										$p_description = $_POST['productDescription'];
 										$p_price = $_POST['productPrice'];
+                    
 
-											$sql = "UPDATE  product SET category_id = '$c_id', p_name = '$p_name',p_description = '$p_description',p_price = $p_price where p_id = $id";
+                    $old_image = $_POST['delete_file'];
+
+
+
+                      // add image
+                      if(isset($_FILES['image']) && $_FILES['image']['name'] != ""){
+
+
+                        $target_dir = "../../images/products/";
+
+                        $image = $_FILES['image']['name'];
+                        $directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
+                        $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . $directory_self . $target_dir;
+                        $uploadDirectory .= $image;
+
+                         //delete old image
+                        if(file_exists($target_dir.$old_image)){
+                          unlink($target_dir.$old_image);
+                        }
+                        move_uploaded_file($_FILES['image']['tmp_name'], $uploadDirectory);
+                      
+
+                      }
+                      else{
+                        $image = $old_image;
+                      }
+
+											$sql = "UPDATE  product SET category_id = '$c_id', p_name = '$p_name',p_description = '$p_description',p_price = $p_price,p_image = '$image' where p_id = $id";
 
 										
 
@@ -149,6 +186,7 @@
 
 											if($result){
                         echo "<script>alert('Product updated!!')</script>";
+                        echo "<script>window.open('all_product.php','_self')</script>";
 											
 											}
                       else{

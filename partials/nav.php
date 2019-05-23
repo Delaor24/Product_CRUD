@@ -15,7 +15,7 @@
 <!-- nav header start-->
     <nav class="navbar navbar-expand-lg  bg-light">
       <div class="container">
-          <a class="navbar-brand" href="index.php">Logo</a>
+          <a class="navbar-brand" href="index.php"><img src="images/logo/logo.jpg" width="30px" height="30px"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-contrss="navbar-toggler-icon"></span>
           </button>
           <div class="colols="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

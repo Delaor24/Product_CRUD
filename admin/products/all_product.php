@@ -82,8 +82,8 @@ $result = mysqli_query($con,$sql);
                   <td><?php echo $row['p_price'] ?></td>
                   <td><img src="../../images/products/<?php echo $row['p_image'] ?>" width=40px; height=40px; ></td>
                     <td>
-                      <button class="btn btn-info"><a href="update.php?id=<?php echo $row['p_id']?>">Edit</a></button>
-                      <button class="btn btn-danger"><a href="delete.php?id=<?php echo $row['p_id']?>">Delete</a></button>
+                      <button class="btn btn-info"><a style="color: black;" href="update.php?id=<?php echo $row['p_id']?>">Edit</a></button>
+                      <button class="btn btn-danger"><a style="color: black;" href="delete.php?id=<?php echo $row['p_id']?>">Delete</a></button>
                     </td>
                 </tr>
 
